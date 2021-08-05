@@ -10,7 +10,7 @@
 
     use Sabre\HTTP\Util;
 
-    class MeetingApiController extends ApiController {
+    class OutlookApiController extends ApiController {
         /** @var RoomService */
         private $service;
 
