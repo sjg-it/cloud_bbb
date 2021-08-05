@@ -16,5 +16,7 @@ return [
 		['name' => 'restriction#user', 'url' => '/restrictions/user', 'verb' => 'GET'],
 		['name' => 'hook#meetingEnded', 'url' => '/hook/ended/{token}/{mac}', 'verb' => 'GET'],
 		['name' => 'hook#recordingReady', 'url' => '/hook/recording/{token}/{mac}', 'verb' => 'GET'],
+		['name' => 'api#create', 'url' => '/api/v1.0/meetings/create', 'verb' => 'POST'],
+		['name' => 'api#getMeetingsFromUserId', 'url' => '/api/v1.0/meetings/all', 'verb' => 'GET'],	
 	]
 ];
