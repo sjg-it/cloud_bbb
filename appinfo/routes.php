@@ -16,7 +16,7 @@ return [
 		['name' => 'restriction#user', 'url' => '/restrictions/user', 'verb' => 'GET'],
 		['name' => 'hook#meetingEnded', 'url' => '/hook/ended/{token}/{mac}', 'verb' => 'GET'],
 		['name' => 'hook#recordingReady', 'url' => '/hook/recording/{token}/{mac}', 'verb' => 'GET'],
-		['name' => 'outlook_api#create', 'url' => '/api/v1.0/meetings/create', 'verb' => 'POST'],
+		['name' => 'outlook_api#createMeeting', 'url' => '/api/v1.0/meetings/create', 'verb' => 'POST'],
 		['name' => 'outlook_api#getMeetingsFromUserId', 'url' => '/api/v1.0/meetings/all', 'verb' => 'GET'],	
 	]
 ];
