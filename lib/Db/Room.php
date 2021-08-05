@@ -84,6 +84,7 @@ class Room extends Entity implements JsonSerializable {
 		$this->addType('mediaCheck', 'boolean');
 		$this->addType('cleanLayout', 'boolean');
 		$this->addType('joinMuted', 'boolean');
+		$this->addType('hideRoom', 'boolean');
 	}
 
 	public function jsonSerialize(): array {
@@ -105,6 +106,7 @@ class Room extends Entity implements JsonSerializable {
 			'mediaCheck' => boolval($this->mediaCheck),
 			'cleanLayout' => boolval($this->cleanLayout),
 			'joinMuted' => boolval($this->joinMuted),
+			'hideRoom' => boolval($this->hideRoom),
 		];
 	}
 }
