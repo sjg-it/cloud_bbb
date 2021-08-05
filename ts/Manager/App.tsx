@@ -69,11 +69,12 @@ const App: React.FC<Props> = () => {
 
 	function loadRooms() {
 		return api.getRooms().then(rooms => {
-			var i;			
-			for(i = 0; i < rooms.length; i++){
-				if(!rooms[i].hideRoom){
-					setOutputRooms[i] = rooms[i];
+			var i = 0;			
+			while(rooms[i] !== null){
+				if(rooms[i].hideRoom === false){
+					outputRooms[i] = rooms[i];
 				}
+				i++;
 			}
 			setRooms(outputRooms);
 		}).catch((err) => {
