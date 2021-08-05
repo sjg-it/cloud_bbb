@@ -72,7 +72,8 @@ class RoomController extends Controller {
 		string $welcome,
 		int $maxParticipants,
 		bool $record,
-		string $access
+		string $access,
+		bool $hideRoom
 	): DataResponse {
 		if (!$this->permission->isAllowedToCreateRoom($this->userId)) {
 			return new DataResponse([], Http::STATUS_FORBIDDEN);
@@ -99,6 +100,7 @@ class RoomController extends Controller {
 			$maxParticipants,
 			$record,
 			$access,
+			$hideRoom,
 			$this->userId
 		));
 	}

@@ -40,6 +40,7 @@ const App: React.FC<Props> = () => {
 	const [error, setError] = useState<string>('');
 	const [restriction, setRestriction] = useState<Restriction>();
 	const [rooms, setRooms] = useState<Room[]>([]);
+	const [outputRooms, setOutputRooms] = useState<Room[]>([]);
 	const [orderBy, setOrderBy] = useState<SortKey>('name');
 	const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
 
@@ -68,7 +69,13 @@ const App: React.FC<Props> = () => {
 
 	function loadRooms() {
 		return api.getRooms().then(rooms => {
-			setRooms(rooms);
+			var i;			
+			for(i = 0; i < rooms.length; i++){
+				if(!rooms[i].hideRoom){
+					setOutputRooms[i] = rooms[i];
+				}
+			}
+			setRooms(outputRooms);
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
 

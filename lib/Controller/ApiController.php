@@ -48,6 +48,7 @@
                 $maxPart,
                 $record,
                 $access,
+                true,
                 $this->userId
             ));
         }
