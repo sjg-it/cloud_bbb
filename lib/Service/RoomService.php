@@ -73,7 +73,7 @@ class RoomService {
 		return $this->mapper->findByUserId($userId);
 	}
 
-	public function create(string $name, string $welcome, int $maxParticipants, bool $record, string $access, string $userId): \OCP\AppFramework\Db\Entity {
+	public function create(string $name, string $welcome, int $maxParticipants, bool $record, string $access, bool $hideRoom, string $userId): \OCP\AppFramework\Db\Entity {
 		$room = new Room();
 
 		$room->setUid(\OC::$server->getSecureRandom()->generate(16, \OCP\Security\ISecureRandom::CHAR_HUMAN_READABLE));
@@ -89,6 +89,7 @@ class RoomService {
 		$room->setMediaCheck(true);
 		$room->setCleanLayout(false);
 		$room->setJoinMuted(false);
+		$room->setHideRoom($hideRoom);
 
 		if ($access === Room::ACCESS_PASSWORD) {
 			$room->setPassword($this->humanReadableRandom(8));
@@ -119,7 +120,8 @@ class RoomService {
 		bool $listenOnly,
 		bool $mediaCheck,
 		bool $cleanLayout,
-		bool $joinMuted) {
+		bool $joinMuted,
+		bool $hideRoom) {
 		try {
 			$room = $this->mapper->find($id);
 
@@ -142,6 +144,7 @@ class RoomService {
 			$room->setMediaCheck($mediaCheck);
 			$room->setCleanLayout($cleanLayout);
 			$room->setJoinMuted($joinMuted);
+			$room->setHideRoom($hide);
 
 			return $this->mapper->update($room);
 		} catch (Exception $e) {

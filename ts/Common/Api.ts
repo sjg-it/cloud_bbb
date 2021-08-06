@@ -43,6 +43,7 @@ export interface Room {
 	mediaCheck: boolean,
 	cleanLayout: boolean,
 	joinMuted: boolean,
+	hideRoom: boolean,
 }
 
 export interface RoomShare {
@@ -157,6 +158,7 @@ class Api {
 			maxParticipants,
 			record: false,
 			access,
+			hideRoom: false,
 		});
 
 		return response.data;
