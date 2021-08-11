@@ -7,6 +7,7 @@ type Props = {
 
 const NewRoomForm: React.FC<Props> = (props) => {
 	const [name, setName] = useState<string>('');
+	const [hidden, setHidden] = useState<boolean>(false);
 	const [processing, setProcessing] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 
@@ -31,8 +32,8 @@ const NewRoomForm: React.FC<Props> = (props) => {
 		setProcessing(true);
 		setError('');
 
-		props.loadHiddenRoom().then(() => {
-
+		props.loadHiddenRooms().then(() => {
+			
 		}).catch(err => {
 			setError(err.toString());
 		}).then(() => {
