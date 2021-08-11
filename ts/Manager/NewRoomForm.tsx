@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 type Props = {
 	addRoom: (name: string) => Promise<void>;
-	loadHiddenRoom: () => Promise<void>;
+	loadHiddenRooms: () => Promise<void>;
 }
 
 const NewRoomForm: React.FC<Props> = (props) => {
@@ -26,13 +26,13 @@ const NewRoomForm: React.FC<Props> = (props) => {
 		});
 	}
 
-	function loadHiddenRoom(ev: React.FormEvent) {
+	function loadHiddenRooms(ev: React.FormEvent) {
 		ev.preventDefault();
 
 		setProcessing(true);
 		setError('');
 
-		props.loadHiddenRoom().then(() => {
+		props.loadHiddenRooms().then(() => {
 			
 		}).catch(err => {
 			setError(err.toString());
