@@ -187,7 +187,7 @@ const App: React.FC<Props> = () => {
 						</td>
 						<td>
 							{(maxRooms > rows.length || maxRooms < 0) ?
-								<NewRoomForm addRoom={addRoom} /> :
+								<NewRoomForm addRoom={addRoom} loadHiddenRooms={loadHiddenRooms} /> :
 								<p className="text-muted">{maxRooms === 0 ?
 									t('bbb', 'You are not permitted to create a room.') :
 									t('bbb', 'You exceeded the maximum number of rooms.')
