@@ -49,7 +49,7 @@ const App: React.FC<Props> = () => {
 	useEffect(() => {
 		Promise.all([
 			loadRestriction(),
-			loadRooms(),
+			loadVisibleRooms(),
 		]).catch(() => {
 			setError(t('bbb', 'Server error'));
 		}).then(() => {
@@ -67,11 +67,27 @@ const App: React.FC<Props> = () => {
 		});
 	}
 
-	function loadRooms() {
+	function loadVisibleRooms() {
 		return api.getRooms().then(rooms => {
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];
 				if(roomObj.hideRoom === false) {
+					outputRooms[i] = roomObj;
+				}
+			}
+			setRooms(outputRooms);
+		}).catch((err) => {
+			console.warn('Could not load rooms', err);
+
+			throw err;
+		});
+	}
+
+	function loadHiddenRooms() {
+		return api.getRooms().then(rooms => {
+			for(var i = 0; i < rooms.length; i++) {
+				var roomObj = rooms[i];
+				if(roomObj.hideRoom === true) {
 					outputRooms[i] = roomObj;
 				}
 			}
