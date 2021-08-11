@@ -26,13 +26,13 @@ const NewRoomForm: React.FC<Props> = (props) => {
 		});
 	}
 
-	function loadHiddenRooms(ev: React.FormEvent) {
+	function loadHiddenRoom(ev: React.FormEvent) {
 		ev.preventDefault();
 
 		setProcessing(true);
 		setError('');
 
-		props.loadHiddenRooms().then(() => {
+		props.loadHiddenRoom().then(() => {
 			
 		}).catch(err => {
 			setError(err.toString());
