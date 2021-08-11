@@ -49,7 +49,12 @@ const NewRoomForm: React.FC<Props> = (props) => {
 				placeholder={t('bbb', 'Room name')}
 				onChange={(event) => { setName(event.target.value); }} />
 
-			<button type="submit" disabled={processing} value={t('bbb', 'Create')} />
+			<button onClick={addRoom}>
+				{t('bbb', 'Create')}
+			</button>
+			<button onClick={loadHiddenRooms}>
+				{t('bbb', 'Show Outlook Rooms')}
+			</button>
 
 			{error && <p>{error}</p>}
 		</form>
