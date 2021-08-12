@@ -73,7 +73,7 @@ const App: React.FC<Props> = () => {
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];
 				if(roomObj.hideRoom === false) {
-					setVisibleRooms(visibleRooms.concat(roomObj));
+					visibleRooms[i] = roomObj;
 				}
 			}
 			setRooms(visibleRooms);
