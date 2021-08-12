@@ -75,7 +75,7 @@ const App: React.FC<Props> = () => {
 					outputRooms[i] = roomObj;
 				}
 			}
-			setRooms(rooms);
+			setRooms(outputRooms);
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
 
@@ -91,7 +91,7 @@ const App: React.FC<Props> = () => {
 					outputRooms[i] = roomObj;
 				}
 			}
-			setRooms(outputRooms);
+			setRooms(rooms);
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
 
