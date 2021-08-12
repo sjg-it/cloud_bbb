@@ -49,7 +49,7 @@ const App: React.FC<Props> = () => {
 	useEffect(() => {
 		Promise.all([
 			loadRestriction(),
-			loadRooms(false),
+			loadRooms('nextcloud'),
 		]).catch(() => {
 			setError(t('bbb', 'Server error'));
 		}).then(() => {
@@ -67,8 +67,14 @@ const App: React.FC<Props> = () => {
 		});
 	}
 
-	function loadRooms(hidden: boolean) {
+	function loadRooms(source: string) {
 		return api.getRooms().then(rooms => {
+			var hidden
+			if(source === 'outlook') {
+				hidden = true;
+			} else {
+				hidden = false;
+			}
 			const outputRooms: Room[] = [];
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];

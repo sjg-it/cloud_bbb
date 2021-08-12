@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 type Props = {
 	addRoom: (name: string) => Promise<void>;
-	loadRooms: (hidden: boolean) => Promise<void>;
+	loadRooms: (source: string) => Promise<void>;
 }
 
 const NewRoomForm: React.FC<Props> = (props) => {
 	const [name, setName] = useState<string>('');
-	const [hidden, setHidden] = useState<boolean>(false);
+	const [source, setSource] = useState<string>('');
 	const [processing, setProcessing] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 	const [buttonName, setButtonName] = useState<string>(t('bbb', 'Show Outlook Add-In Rooms'));
@@ -30,16 +30,15 @@ const NewRoomForm: React.FC<Props> = (props) => {
 	function loadRooms(ev: React.FormEvent) {
 		ev.preventDefault();
 
-		setHidden(true);
 		setProcessing(true);
 		setError('');
 
-		props.loadRooms(hidden).then(() => {
+		props.loadRooms(source).then(() => {
 			if(buttonName === t('bbb', 'Show Nextcloud-Web Rooms')) {
-				setHidden(true);
+				setSource('nextcloud');
 				setButtonName(t('bbb', 'Show Outlook Add-In Rooms'))
 			} else if(buttonName === t('bbb', 'Show Outlook Add-In Rooms')) {
-				setHidden(false);
+				setSource('outlook');
 				setButtonName(t('bbb', 'Show Nextcloud-Web Rooms'))
 			}
 			
