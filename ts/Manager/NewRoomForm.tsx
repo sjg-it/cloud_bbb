@@ -7,7 +7,7 @@ type Props = {
 
 const NewRoomForm: React.FC<Props> = (props) => {
 	const [name, setName] = useState<string>('');
-	const [hidden, setHidden] = useState<boolean>();
+	const [hidden, setHidden] = useState<boolean>(false);
 	const [processing, setProcessing] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 	const [buttonName, setButtonName] = useState<string>(t('bbb', 'Show Outlook Add-In Rooms'));
@@ -30,6 +30,7 @@ const NewRoomForm: React.FC<Props> = (props) => {
 	function loadRooms(ev: React.FormEvent) {
 		ev.preventDefault();
 
+		setHidden(true);
 		setProcessing(true);
 		setError('');
 
