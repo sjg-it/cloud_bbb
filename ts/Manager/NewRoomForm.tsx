@@ -34,7 +34,12 @@ const NewRoomForm: React.FC<Props> = (props) => {
 		setError('');
 
 		props.loadHiddenRooms().then(() => {
-			setButtonName(t('bbb', 'Show Nextcloud-Web Rooms'))
+			if(buttonName === t('bbb', 'Show Nextcloud-Web Rooms')) {
+				setButtonName(t('bbb', 'Show Outlook Add-In Rooms'))
+			} else if(buttonName === t('bbb', 'Show Outlook Add-In Rooms')) {
+				setButtonName(t('bbb', 'Show Nextcloud-Web Rooms'))
+			}
+			
 		}).catch(err => {
 			setError(err.toString());
 		}).then(() => {
