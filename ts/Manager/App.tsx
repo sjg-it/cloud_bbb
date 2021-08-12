@@ -89,10 +89,10 @@ const App: React.FC<Props> = () => {
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];
 				if(roomObj.hideRoom === true) {
-					hiddenRooms[i] = roomObj;
+					rooms[i] = roomObj;
 				}
 			}
-			setRooms(hiddenRooms);
+			setRooms(rooms);
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
 
