@@ -32,16 +32,18 @@ const NewRoomForm: React.FC<Props> = (props) => {
 
 		setProcessing(true);
 		setError('');
+		if(buttonName === t('bbb', 'Show Nextcloud-Web Rooms')) {
+			setSource('nextcloud');			
+		} else if(buttonName === t('bbb', 'Show Outlook Add-In Rooms')) {
+			setSource('outlook');
+		}	
 
 		props.loadRooms(source).then(() => {
 			if(buttonName === t('bbb', 'Show Nextcloud-Web Rooms')) {
-				setSource('nextcloud');
-				setButtonName(t('bbb', 'Show Outlook Add-In Rooms'))
+				setButtonName(t('bbb', 'Show Outlook Add-In Rooms'));
 			} else if(buttonName === t('bbb', 'Show Outlook Add-In Rooms')) {
-				setSource('outlook');
-				setButtonName(t('bbb', 'Show Nextcloud-Web Rooms'))
-			}
-			
+				setButtonName(t('bbb', 'Show Nextcloud-Web Rooms'));
+			}			
 		}).catch(err => {
 			setError(err.toString());
 		}).then(() => {
