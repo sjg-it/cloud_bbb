@@ -69,7 +69,7 @@ const App: React.FC<Props> = () => {
 
 	function loadRooms(hidden: boolean) {
 		return api.getRooms().then(rooms => {
-			var outputRooms;
+			const [outputRooms] = useState<Room[]>([]);
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];
 				if(roomObj.hideRoom === hidden) {
