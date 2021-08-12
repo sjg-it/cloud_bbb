@@ -10,6 +10,7 @@ const NewRoomForm: React.FC<Props> = (props) => {
 	const [hidden, setHidden] = useState<boolean>(false);
 	const [processing, setProcessing] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
+	const [buttonName, setButtonName] = useState<string>(t('bbb', 'Show Outlook Add-In Rooms'));
 
 	function addRoom(ev: React.FormEvent) {
 		ev.preventDefault();
@@ -33,7 +34,7 @@ const NewRoomForm: React.FC<Props> = (props) => {
 		setError('');
 
 		props.loadHiddenRooms().then(() => {
-			
+			setButtonName(t('bbb', 'Show Nextcloud-Web Rooms'))
 		}).catch(err => {
 			setError(err.toString());
 		}).then(() => {
@@ -54,7 +55,7 @@ const NewRoomForm: React.FC<Props> = (props) => {
 				{t('bbb', 'Create')}
 			</button>
 			<button onClick={loadHiddenRooms}>
-				{t('bbb', 'Show Outlook Rooms')}
+				{buttonName}
 			</button>
 
 			{error && <p>{error}</p>}
