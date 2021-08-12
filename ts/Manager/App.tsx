@@ -68,8 +68,8 @@ const App: React.FC<Props> = () => {
 	}
 
 	function loadRooms(hidden: boolean) {
-		const outputRooms: Room[] = [];
 		return api.getRooms().then(rooms => {
+			const outputRooms: Room[] = [];
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];
 				if(roomObj.hideRoom === hidden) {
