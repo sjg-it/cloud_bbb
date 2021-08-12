@@ -40,7 +40,8 @@ const App: React.FC<Props> = () => {
 	const [error, setError] = useState<string>('');
 	const [restriction, setRestriction] = useState<Restriction>();
 	const [rooms, setRooms] = useState<Room[]>([]);
-	const [outputRooms, setOutputRooms] = useState<Room[]>([]);
+	const [visibleRooms, setVisibleRooms] = useState<Room[]>([]);
+	const [hiddenRooms, setHiddenRooms] = useState<Room[]>([]);
 	const [orderBy, setOrderBy] = useState<SortKey>('name');
 	const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
 
@@ -72,10 +73,10 @@ const App: React.FC<Props> = () => {
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];
 				if(roomObj.hideRoom === false) {
-					outputRooms[i] = roomObj;
+					setVisibleRooms(visibleRooms.concat(roomObj));
 				}
 			}
-			setRooms(outputRooms);
+			setRooms(visibleRooms);
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
 
@@ -88,10 +89,10 @@ const App: React.FC<Props> = () => {
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];
 				if(roomObj.hideRoom === true) {
-					outputRooms[i] = roomObj;
+					hiddenRooms[i] = roomObj;
 				}
 			}
-			setRooms(rooms);
+			setRooms(hiddenRooms);
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
 
