@@ -75,7 +75,6 @@ const App: React.FC<Props> = () => {
 					outputRooms[i] = roomObj;
 				}
 			}
-			setRooms(null);
 			setRooms(rooms.concat([outputRooms]));
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
