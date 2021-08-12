@@ -40,8 +40,7 @@ const App: React.FC<Props> = () => {
 	const [error, setError] = useState<string>('');
 	const [restriction, setRestriction] = useState<Restriction>();
 	const [rooms, setRooms] = useState<Room[]>([]);
-	const [visibleRooms, setVisibleRooms] = useState<Room[]>([]);
-	const [hiddenRooms, setHiddenRooms] = useState<Room[]>([]);
+	//const [outputRooms, setOutputRooms] = useState<Room[]>([]);
 	const [orderBy, setOrderBy] = useState<SortKey>('name');
 	const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
 
@@ -50,7 +49,7 @@ const App: React.FC<Props> = () => {
 	useEffect(() => {
 		Promise.all([
 			loadRestriction(),
-			loadVisibleRooms(),
+			loadRooms(false),
 		]).catch(() => {
 			setError(t('bbb', 'Server error'));
 		}).then(() => {
@@ -68,15 +67,16 @@ const App: React.FC<Props> = () => {
 		});
 	}
 
-	function loadVisibleRooms() {
+	function loadRooms(hidden: boolean) {
 		return api.getRooms().then(rooms => {
+			var outputRooms;
 			for(var i = 0; i < rooms.length; i++) {
 				var roomObj = rooms[i];
-				if(roomObj.hideRoom === false) {
-					visibleRooms[i] = roomObj;
+				if(roomObj.hideRoom === hidden) {
+					outputRooms[i] = roomObj;
 				}
 			}
-			setRooms(visibleRooms);
+			setRooms(outputRooms);
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
 
@@ -188,7 +188,7 @@ const App: React.FC<Props> = () => {
 						</td>
 						<td>
 							{(maxRooms > rows.length || maxRooms < 0) ?
-								<NewRoomForm addRoom={addRoom} loadHiddenRooms={loadHiddenRooms} /> :
+								<NewRoomForm addRoom={addRoom} loadRooms={loadRooms} /> :
 								<p className="text-muted">{maxRooms === 0 ?
 									t('bbb', 'You are not permitted to create a room.') :
 									t('bbb', 'You exceeded the maximum number of rooms.')

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 type Props = {
 	addRoom: (name: string) => Promise<void>;
-	loadHiddenRooms: () => Promise<void>;
+	loadRooms: (hidden: boolean) => Promise<void>;
 }
 
 const NewRoomForm: React.FC<Props> = (props) => {
@@ -27,16 +27,18 @@ const NewRoomForm: React.FC<Props> = (props) => {
 		});
 	}
 
-	function loadHiddenRooms(ev: React.FormEvent) {
+	function loadRooms(ev: React.FormEvent) {
 		ev.preventDefault();
 
 		setProcessing(true);
 		setError('');
 
-		props.loadHiddenRooms().then(() => {
+		props.loadRooms(hidden).then(() => {
 			if(buttonName === t('bbb', 'Show Nextcloud-Web Rooms')) {
+				setHidden(false);
 				setButtonName(t('bbb', 'Show Outlook Add-In Rooms'))
 			} else if(buttonName === t('bbb', 'Show Outlook Add-In Rooms')) {
+				setHidden(true);
 				setButtonName(t('bbb', 'Show Nextcloud-Web Rooms'))
 			}
 			
@@ -59,7 +61,7 @@ const NewRoomForm: React.FC<Props> = (props) => {
 			<button onClick={addRoom}>
 				{t('bbb', 'Create')}
 			</button>
-			<button onClick={loadHiddenRooms}>
+			<button onClick={loadRooms}>
 				{buttonName}
 			</button>
 
