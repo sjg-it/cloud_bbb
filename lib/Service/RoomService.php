@@ -120,8 +120,7 @@ class RoomService {
 		bool $listenOnly,
 		bool $mediaCheck,
 		bool $cleanLayout,
-		bool $joinMuted,
-		bool $hideRoom) {
+		bool $joinMuted) {
 		try {
 			$room = $this->mapper->find($id);
 
