@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 
 type Props = {
 	addRoom: (name: string) => Promise<void>;
+	loadRooms: (source: string) => Promise<void>;
 }
 
 const NewRoomForm: React.FC<Props> = (props) => {
 	const [name, setName] = useState<string>('');
+	const [source, setSource] = useState<string>('outlook');
 	const [processing, setProcessing] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
+	const [buttonName, setButtonName] = useState<string>(t('bbb', 'Show Outlook Add-In Rooms'));
 
 	function addRoom(ev: React.FormEvent) {
 		ev.preventDefault();
@@ -24,8 +27,29 @@ const NewRoomForm: React.FC<Props> = (props) => {
 		});
 	}
 
+	function loadRooms(ev: React.FormEvent) {
+		ev.preventDefault();
+
+		setProcessing(true);
+		setError('');
+
+		props.loadRooms(source).then(() => {
+			if(buttonName === t('bbb', 'Show Nextcloud-Web Rooms')) {
+				setSource('outlook');
+				setButtonName(t('bbb', 'Show Outlook Add-In Rooms'));
+			} else if(buttonName === t('bbb', 'Show Outlook Add-In Rooms')) {
+				setSource('nextcloud');
+				setButtonName(t('bbb', 'Show Nextcloud-Web Rooms'));
+			}			
+		}).catch(err => {
+			setError(err.toString());
+		}).then(() => {
+			setProcessing(false);
+		});
+	}
+
 	return (
-		<form action="#" onSubmit={addRoom}>
+		<form action="#">
 			<input
 				className="newgroup-name"
 				disabled={processing}
@@ -33,7 +57,12 @@ const NewRoomForm: React.FC<Props> = (props) => {
 				placeholder={t('bbb', 'Room name')}
 				onChange={(event) => { setName(event.target.value); }} />
 
-			<input type="submit" disabled={processing} value={t('bbb', 'Create')} />
+			<button onClick={addRoom}>
+				{t('bbb', 'Create')}
+			</button>
+			<button onClick={loadRooms}>
+				{buttonName}
+			</button>
 
 			{error && <p>{error}</p>}
 		</form>
