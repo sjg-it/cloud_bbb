@@ -40,6 +40,7 @@ const App: React.FC<Props> = () => {
 	const [error, setError] = useState<string>('');
 	const [restriction, setRestriction] = useState<Restriction>();
 	const [rooms, setRooms] = useState<Room[]>([]);
+	//const [outputRooms, setOutputRooms] = useState<Room[]>([]);
 	const [orderBy, setOrderBy] = useState<SortKey>('name');
 	const [sortOrder, setSortOrder] = useState(SortOrder.ASC);
 
@@ -48,7 +49,7 @@ const App: React.FC<Props> = () => {
 	useEffect(() => {
 		Promise.all([
 			loadRestriction(),
-			loadRooms(),
+			loadRooms('nextcloud'),
 		]).catch(() => {
 			setError(t('bbb', 'Server error'));
 		}).then(() => {
@@ -66,8 +67,37 @@ const App: React.FC<Props> = () => {
 		});
 	}
 
-	function loadRooms() {
+	function loadRooms(source: string) {
 		return api.getRooms().then(rooms => {
+			var hidden
+			if(source === 'outlook') {
+				hidden = true;
+			} else {
+				hidden = false;
+			}
+			const outputRooms: Room[] = [];
+			for(var i = 0; i < rooms.length; i++) {
+				var roomObj = rooms[i];
+				if(roomObj.hideRoom === hidden) {
+					outputRooms[i] = roomObj;
+				}
+			}
+			setRooms(outputRooms);
+		}).catch((err) => {
+			console.warn('Could not load rooms', err);
+
+			throw err;
+		});
+	}
+
+	function loadHiddenRooms() {
+		return api.getRooms().then(rooms => {
+			for(var i = 0; i < rooms.length; i++) {
+				var roomObj = rooms[i];
+				if(roomObj.hideRoom === true) {
+					rooms[i] = roomObj;
+				}
+			}
 			setRooms(rooms);
 		}).catch((err) => {
 			console.warn('Could not load rooms', err);
@@ -164,7 +194,7 @@ const App: React.FC<Props> = () => {
 						</td>
 						<td>
 							{(maxRooms > rows.length || maxRooms < 0) ?
-								<NewRoomForm addRoom={addRoom} /> :
+								<NewRoomForm addRoom={addRoom} loadRooms={loadRooms} /> :
 								<p className="text-muted">{maxRooms === 0 ?
 									t('bbb', 'You are not permitted to create a room.') :
 									t('bbb', 'You exceeded the maximum number of rooms.')
