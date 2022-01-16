@@ -5,6 +5,33 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- add optional avatar cache
+- add command to clear avatar cache
+
+### Fixed
+- use injection for random generator
+
+### Misc
+- remove deprecated api calls
+- enable app for unit tests
+
+## 2.1.0 (2021-12-08)
+### Added
+- bump max nc version to 23
+- [#184](https://github.com/sualko/cloud_bbb/issues/184) add origin meta params
+- [#176](https://github.com/sualko/cloud_bbb/issues/176) add admin settings for default skip media
+- [#152](https://github.com/sualko/cloud_bbb/issues/152) add option for all users to join a meeting muted (#173)
+
+### Fixed
+- [#183](https://github.com/sualko/cloud_bbb/issues/183) replace non-ascii chars for filenames
+- [#174](https://github.com/sualko/cloud_bbb/issues/174) sort recordings by date
+- fix collapsible arrow
+- use settings icon for room settings
+- log response message for create request
+
+### Misc
+- update dependencies
 
 ## 2.0.0 (2021-07-28)
 ### Added

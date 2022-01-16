@@ -9,14 +9,18 @@ use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
+use OCA\BigBlueButton\AppInfo\Application;
+use OCA\BigBlueButton\AvatarRepository;
 use OCA\BigBlueButton\Crypto;
 use OCA\BigBlueButton\Db\Room;
 use OCA\BigBlueButton\Event\MeetingStartedEvent;
 use OCA\BigBlueButton\UrlHelper;
+use OCP\App\IAppManager;
 use OCP\Defaults;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IConfig;
 use OCP\IL10N;
+use OCP\IRequest;
 use OCP\IURLGenerator;
 
 class API {
@@ -44,6 +48,15 @@ class API {
 	/** @var Defaults */
 	private $defaults;
 
+	/** @var IAppManager */
+	private $appManager;
+
+	/** @var AvatarRepository */
+	private $avatarRepository;
+
+	/** @var IRequest */
+	private $request;
+
 	public function __construct(
 		IConfig $config,
 		IURLGenerator $urlGenerator,
@@ -51,7 +64,10 @@ class API {
 		IEventDispatcher $eventDispatcher,
 		IL10N $l10n,
 		UrlHelper $urlHelper,
-		Defaults $defaults
+		Defaults $defaults,
+		IAppManager $appManager,
+		AvatarRepository $avatarRepository,
+		IRequest $request
 	) {
 		$this->config = $config;
 		$this->urlGenerator = $urlGenerator;
@@ -60,6 +76,9 @@ class API {
 		$this->l10n = $l10n;
 		$this->urlHelper = $urlHelper;
 		$this->defaults = $defaults;
+		$this->appManager = $appManager;
+		$this->avatarRepository = $avatarRepository;
+		$this->request = $request;
 	}
 
 	private function getServer(): BigBlueButton {
@@ -84,7 +103,7 @@ class API {
 		$joinMeetingParams = new JoinMeetingParameters($room->uid, $displayname, $password);
 
 		// ensure that float is not converted to a string in scientific notation
-		$joinMeetingParams->setCreationTime(sprintf("%.0f", $creationTime));
+		$joinMeetingParams->setCreateTime(sprintf("%.0f", $creationTime));
 		$joinMeetingParams->setJoinViaHtml5(true);
 		$joinMeetingParams->setRedirect(true);
 		$joinMeetingParams->setGuest($uid === null);
@@ -108,8 +127,10 @@ class API {
 		}
 
 		if ($uid) {
-			$joinMeetingParams->setUserId($uid);
-			$joinMeetingParams->setAvatarURL($this->urlGenerator->linkToRouteAbsolute('core.avatar.getAvatar', ['userId' => $uid, 'size' => 32]));
+			$avatarUrl = $this->avatarRepository->getAvatarUrl($room, $uid);
+
+			$joinMeetingParams->setUserID($uid);
+			$joinMeetingParams->setAvatarURL($avatarUrl);
 		}
 
 		return $this->getServer()->getJoinMeetingURL($joinMeetingParams);
@@ -143,12 +164,16 @@ class API {
 
 	private function buildMeetingParams(Room $room, Presentation $presentation = null): CreateMeetingParameters {
 		$createMeetingParams = new CreateMeetingParameters($room->uid, $room->name);
-		$createMeetingParams->setAttendeePassword($room->attendeePassword);
-		$createMeetingParams->setModeratorPassword($room->moderatorPassword);
+		$createMeetingParams->setAttendeePW($room->attendeePassword);
+		$createMeetingParams->setModeratorPW($room->moderatorPassword);
 		$createMeetingParams->setRecord($room->record);
 		$createMeetingParams->setAllowStartStopRecording($room->record);
-		$createMeetingParams->setLogoutUrl($this->urlGenerator->getBaseUrl());
+		$createMeetingParams->setLogoutURL($this->urlGenerator->getBaseUrl());
 		$createMeetingParams->setMuteOnStart($room->getJoinMuted());
+
+		$createMeetingParams->addMeta('bbb-origin-version', $this->appManager->getAppVersion(Application::ID));
+		$createMeetingParams->addMeta('bbb-origin', \method_exists($this->defaults, 'getProductName') ? $this->defaults->getProductName() : 'Nextcloud');
+		$createMeetingParams->addMeta('bbb-origin-server-name', $this->request->getServerHost());
 
 		$mac = $this->crypto->calculateHMAC($room->uid);
 
@@ -162,7 +187,7 @@ class API {
 		$createMeetingParams->setModeratorOnlyMessage($this->l10n->t('To invite someone to the meeting, send them this link: %s', [$invitationUrl]));
 
 		if (!empty($room->welcome)) {
-			$createMeetingParams->setWelcomeMessage($room->welcome);
+			$createMeetingParams->setWelcome($room->welcome);
 		}
 
 		if ($room->maxParticipants > 0) {
@@ -183,7 +208,7 @@ class API {
 
 	public function getRecording(string $recordId) {
 		$recordingParams = new GetRecordingsParameters();
-		$recordingParams->setRecordId($recordId);
+		$recordingParams->setRecordID($recordId);
 		$recordingParams->setState('any');
 
 		$response = $this->getServer()->getRecordings($recordingParams);
@@ -203,7 +228,7 @@ class API {
 
 	public function getRecordings(Room $room): array {
 		$recordingParams = new GetRecordingsParameters();
-		$recordingParams->setMeetingId($room->uid);
+		$recordingParams->setMeetingID($room->uid);
 		$recordingParams->setState('processing,processed,published,unpublished');
 
 		$response = $this->getServer()->getRecordings($recordingParams);
