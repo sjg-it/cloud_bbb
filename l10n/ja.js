@@ -26,6 +26,9 @@ OC.L10N.register(
     "Save" : "保存",
     "Show room manager in app navigation instead of settings page." : "アプリのナビに、設定ページの代わりに会議室管理画面を表示する。",
     "Use Nextcloud theme in BigBlueButton." : "NextcloudのテーマをBigBlueButtonに使用する",
+    "Default Room Settings" : "会議室の設定既定値",
+    "Below you can change some default values, which are used to create a new room." : "以下でいくつかの既定値を変更することができます。これらの設定は新しい会議室をつくるときに使用されます。",
+    "Perform media check before usage" : "使用前にメディアチェックを行う",
     "Community" : "コミュニティー",
     "Are you enjoying this app? Give something back to the open source community." : "このアプリに満足ですか？オープンソースコミュニティーに何かメッセージをお願いします。",
     "Checkout the contributor guide" : "開発貢献者ガイドをみる",
@@ -125,6 +128,7 @@ OC.L10N.register(
     "URL has to start with HTTPS" : "URLはHTTPSで始まる必要があります",
     "URL has to contain the {token} placeholder" : "URLは{token}プレースホルダを含んでいる必要があります",
     "URL has to start with https:// and contain {token}. Additionally the {user} placeholder can be used." : "URLはhttps://で始まり、{token}を含む必要があります。更に {user}プレースホルダを使用することもできます。",
+    "Start" : "開始",
     "_This room is not open yet. We will try it again in %n second. Please wait._::_This room is not open yet. We will try it again in %n seconds. Please wait._" : ["この会議室はまだ開いていません。%n秒後に再アクセスしますので少しお待ちください。"]
 },
 "nplurals=1; plural=0;");
