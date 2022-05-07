@@ -69,13 +69,52 @@ used configuration keys in the list below. Please beware that there will be no
 check if those values are correct. Therefore this is not the recommended way.
 The syntax to set all settings is `occ config:app:set bbb KEY --value "VALUE"`.
 
-Key                   | Description
---------------------- | ------------------------------------------------------------------------------------
-`app.navigation`      | Set to `true` to show navigation entry
-`app.navigation.name` | Defines the navigation label. Default "BigBlueButton".
-`api.url`             | URL to your BBB server. Should start with `https://`
-`api.secret`          | Secret of your BBB server
-`app.shortener`       | Value of your shortener service. Should start with `https://` and contain `{token}`.
+Key                               | Description
+--------------------------------- | ------------------------------------------------------------------------------------
+`app.navigation`                  | Set to `true` to show navigation entry
+`app.navigation.name`             | Defines the navigation label. Default "BigBlueButton".
+`api.url`                         | URL to your BBB server. Should start with `https://`
+`api.secret`                      | Secret of your BBB server
+`api.meta_analytics-callback-url` | URL which gets called after meetings ends to generate statistics. See [bbb-analytics](https://github.com/betagouv/bbb-analytics).
+`app.shortener`                   | Value of your shortener service. Should start with `https://` and contain `{token}`.
+`avatar.path`                     | Absolute path to an optional avatar cache directory.
+`avatar.url`                      | URL which serves `avatar.path` to be used as avatar cache.
+
+### Avatar cache (v2.2+)
+The generation of avatars puts a high load on your Nextcloud instance, since the
+number of requests increases squarely to the number of participants in a room.
+To mitigate this situation, this app provides an optional avatar file cache. To
+activate the cache `avatar.path` and `avatar.url` have to be configured.
+`avatar.path` must provide an absolute path (e.g. `/srv/bbb-avatar-cache/`) to a
+directory which is writable by the PHP user. `avatar.url` must contain the url
+which serves all files from `avatar.path`. To bypass browser connection limits
+we recommend to setup a dedicated host.
+
+Example Apache configuration for a dedicated host with `avatar.path = /srv/bbb-avatar-cache/`
+and `avatar.url = https://avatar-cache.your-nextcloud.com/`:
+
+```
+<VirtualHost *:443>
+        ServerName avatar-cache.your-nextcloud.com
+
+        Header always set Strict-Transport-Security "max-age=15768000;"
+
+        DocumentRoot /srv/bbb-avatar-cache
+        <Directory /srv/bbb-avatar-cache>
+                Options -FollowSymLinks -Indexes
+        </Directory>
+
+        SSLEngine On
+        # SSL config...
+</VirtualHost>
+```
+
+For additional security, we recommend to disable directory listing, symlinks and
+any language interpreter such as php for the cache directory.
+
+Cached avatars are usually deleted as soon as the meeting ends. In cases the BBB
+server shuts down unexpected, we provide the `bbb:clear-avatar-cache` occ
+command (example use: `./occ bbb:clear-avatar-cache`).
 
 
 ## :bowtie: User guide

@@ -26,6 +26,9 @@ OC.L10N.register(
     "Save" : "Guardar",
     "Show room manager in app navigation instead of settings page." : "Mostrar el gestor de salas en la navegación de la app en lugar de la página de configuración.",
     "Use Nextcloud theme in BigBlueButton." : "Usar el tema de Nextcloud en BigBlueButton.",
+    "Default Room Settings" : "Ajustes por Defecto de la Sala",
+    "Below you can change some default values, which are used to create a new room." : "Abajo puedes cambiar algunos valores por defecto, que se usan para crear una nueva sala.",
+    "Perform media check before usage" : "Realizar comprobación multimedia antes de usar",
     "Community" : "Comunidad",
     "Are you enjoying this app? Give something back to the open source community." : "¿Te gusta esta app? Devuelve algo a la comunidad de código abierto.",
     "Checkout the contributor guide" : "Consulte la guía para colaboradores",
@@ -125,6 +128,7 @@ OC.L10N.register(
     "URL has to start with HTTPS" : "La URL tiene que comenzar con https",
     "URL has to contain the {token} placeholder" : "La URL debe contener el referente {token}",
     "URL has to start with https:// and contain {token}. Additionally the {user} placeholder can be used." : "La URL tiene que comenzar con https:// y contener {token}. Adicionalmente, se puede usar el referente {user}.",
+    "Start" : "Iniciar",
     "_This room is not open yet. We will try it again in %n second. Please wait._::_This room is not open yet. We will try it again in %n seconds. Please wait._" : ["Esta sala todavía no está abierta. Volveremos a intentarlo en %n segundo. Por favor, espera.","Esta sala todavía no está abierta. Volveremos a intentarlo en %n segundos. Por favor, espera."]
 },
 "nplurals=2; plural=(n != 1);");

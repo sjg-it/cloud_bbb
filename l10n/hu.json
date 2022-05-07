@@ -24,6 +24,9 @@
     "Save" : "Mentés",
     "Show room manager in app navigation instead of settings page." : "A beállítások oldal helyett, a szobakezelő megjelenítése az alkalmazásnavigációban.",
     "Use Nextcloud theme in BigBlueButton." : "A Nextcloud téma használata a BigBlueButtonban.",
+    "Default Room Settings" : "Alapértelmezett szobabeállítások",
+    "Below you can change some default values, which are used to create a new room." : "Lent módosíthat néhány alapértelmezett értéket, amelyek az új szoba létrehozásához lesznek használva.",
+    "Perform media check before usage" : "Média-ellenőrzés végrehajtása a használat előtt",
     "Community" : "Közösség",
     "Are you enjoying this app? Give something back to the open source community." : "Élvezi az alkalmazás használatát? Adjon vissza valamit a nyílt forráskódú közösségnek.",
     "Checkout the contributor guide" : "Tekintse meg a közreműködői útmutatót",
@@ -48,6 +51,7 @@
     "Public" : "Nyilvános",
     "Internal + Password protection for guests" : "Belső + Jelszavas védelem a vendégeknek",
     "Internal + Waiting room for guests" : "Belső + Váró a vendégeknek",
+    "Waiting room for all users" : "Váróterem az összes felhasználó számára",
     "Internal" : "Belső",
     "Internal restricted" : "Belső, korlátozott",
     "Name" : "Név",
@@ -123,6 +127,11 @@
     "URL has to start with HTTPS" : "Az URL-nek HTTPS-sel kell kezdődnie",
     "URL has to contain the {token} placeholder" : "Az URL-nek tartalmaznia kell a(z) {token} helykitöltőt",
     "URL has to start with https:// and contain {token}. Additionally the {user} placeholder can be used." : "Az URL-nek https://-sel kell kezdődnie, és tartalmaznia kell a következőt: {token}. Továbbá a(z) {user} helykitöltő is használható.",
+    "Send file to BBB" : "Fájl küldése a BBB-re",
+    "Start" : "Kezdés",
+    "Please select the room in which you like to use the file \"{filename}\"." : "Válassza ki azt a szobát, amelyben a(z) „[filename}” fájlt használná.",
+    "No rooms available!" : "Nincs elérhető szoba!",
+    "Send to BBB" : "Küldés a BBB-re",
     "_This room is not open yet. We will try it again in %n second. Please wait._::_This room is not open yet. We will try it again in %n seconds. Please wait._" : ["A szoba még nincs nyitva. Próbálja újra %n másodperc múlva. Kis türelmet.","A szoba még nincs nyitva. Próbálja újra %n másodperc múlva. Kis türelmet."]
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
