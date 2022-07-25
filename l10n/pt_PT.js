@@ -22,10 +22,11 @@ OC.L10N.register(
     "Recordings" : "Gravações",
     "Edit" : "Editar",
     "Welcome" : "Bem-vindo",
+    "Miscellaneous" : "Diversos",
     "Room name" : "Nome da sala",
     "Create" : "Criar",
     "Copy to clipboard" : "Copiar para área de transferência",
-    "_%n participant_::_%n participants_" : ["%n participante","%n participantes"],
+    "_%n participant_::_%n participants_" : ["%n participante","%n participantes","%n participantes"],
     "Delete" : "Eliminar",
     "Delete \"{name}\"?" : "Eliminar \"{name}\"?",
     "Select target folder" : "Selecionar pasta de destino",
@@ -36,7 +37,6 @@ OC.L10N.register(
     "moderator" : "moderador",
     "Share" : "Partilhar",
     "Loading" : "A carregar",
-    "Settings saved" : "Definições guardadas",
-    "Start" : "Início"
+    "Settings saved" : "Definições guardadas"
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

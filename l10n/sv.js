@@ -15,6 +15,7 @@ OC.L10N.register(
     "Public" : "Offentlig",
     "Name" : "Namn",
     "Access" : "Åtkomst",
+    "Max" : "Max",
     "Edit" : "Redigera",
     "Welcome" : "Välkommen",
     "Miscellaneous" : "Diverse",
@@ -27,7 +28,6 @@ OC.L10N.register(
     "moderator" : "moderator",
     "Share" : "Dela",
     "Loading" : "Läser in",
-    "Settings saved" : "Inställningar sparade",
-    "Start" : "Start"
+    "Settings saved" : "Inställningar sparade"
 },
 "nplurals=2; plural=(n != 1);");
