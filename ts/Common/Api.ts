@@ -44,7 +44,6 @@ export interface Room {
 	mediaCheck: boolean,
 	cleanLayout: boolean,
 	joinMuted: boolean,
-	hideRoom: boolean,
 	running: boolean,
 }
 
