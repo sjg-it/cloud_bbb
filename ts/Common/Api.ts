@@ -45,6 +45,7 @@ export interface Room {
 	cleanLayout: boolean,
 	joinMuted: boolean,
 	hideRoom: boolean,
+	running: boolean,
 }
 
 export interface RoomShare {
