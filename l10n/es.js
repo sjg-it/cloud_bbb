@@ -53,6 +53,7 @@ OC.L10N.register(
     "Public" : "Público",
     "Internal + Password protection for guests" : "Protección Interna + Contraseña para los invitados",
     "Internal + Waiting room for guests" : "Sala de Espera + Interna para invitados",
+    "Waiting room for all users" : "Sala de espera para todos los usuarios",
     "Internal" : "Interno",
     "Internal restricted" : "Restringido interno",
     "Name" : "Nombre",
@@ -95,7 +96,7 @@ OC.L10N.register(
     "Open recording" : "Abrir grabación",
     "Copy to clipboard" : "Copiar al portapapeles",
     "Save as file" : "Guardar como",
-    "_%n participant_::_%n participants_" : ["%n participante","%n participantes"],
+    "_%n participant_::_%n participants_" : ["%n participante","%n participantes","%n participantes"],
     "Delete" : "Eliminar",
     "Are you sure you want to delete \"{name}\"? This operation cannot be undone." : "Está seguro que quiere eliminar \"{name}\"? Esta operación no se puede deshacer.",
     "Delete \"{name}\"?" : "¿Eliminar \"{name}\"?",
@@ -128,7 +129,11 @@ OC.L10N.register(
     "URL has to start with HTTPS" : "La URL tiene que comenzar con https",
     "URL has to contain the {token} placeholder" : "La URL debe contener el referente {token}",
     "URL has to start with https:// and contain {token}. Additionally the {user} placeholder can be used." : "La URL tiene que comenzar con https:// y contener {token}. Adicionalmente, se puede usar el referente {user}.",
-    "Start" : "Iniciar",
-    "_This room is not open yet. We will try it again in %n second. Please wait._::_This room is not open yet. We will try it again in %n seconds. Please wait._" : ["Esta sala todavía no está abierta. Volveremos a intentarlo en %n segundo. Por favor, espera.","Esta sala todavía no está abierta. Volveremos a intentarlo en %n segundos. Por favor, espera."]
+    "Send file to BBB" : "Enviar a ...",
+    "Send to" : "Enviar a",
+    "Please select the room in which you like to use the file \"{filename}\"." : "Seleccione la sala en la que desea utilizar el archivo \"{filename}\".",
+    "No rooms available!" : "No hay salas disponibles",
+    "Send to BBB" : "Enviar a BBB",
+    "_This room is not open yet. We will try it again in %n second. Please wait._::_This room is not open yet. We will try it again in %n seconds. Please wait._" : ["Esta sala todavía no está abierta. Volveremos a intentarlo en %n segundo. Por favor, espera.","Esta sala todavía no está abierta. Volveremos a intentarlo en %n segundos. Por favor, espera.","Esta sala todavía no está abierta. Volveremos a intentarlo en %n segundos. Por favor, espera."]
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

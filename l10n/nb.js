@@ -1,6 +1,7 @@
 OC.L10N.register(
     "bbb",
     {
+    "Room not found" : "Rom ikke funnet",
     "Back to %s" : "Tilbake til %s",
     "Save" : "Lagre",
     "Community" : "Samfunn",
@@ -26,7 +27,6 @@ OC.L10N.register(
     "moderator" : "moderator",
     "Share" : "Del",
     "Loading" : "Laster",
-    "Settings saved" : "Innstillinger lagret",
-    "Start" : "Start"
+    "Settings saved" : "Innstillinger lagret"
 },
 "nplurals=2; plural=(n != 1);");

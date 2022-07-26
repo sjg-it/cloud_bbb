@@ -18,13 +18,13 @@ OC.L10N.register(
     "Miscellaneous" : "Разно",
     "Create" : "Креирај",
     "Copy to clipboard" : "Копирај во клипборд",
+    "_%n participant_::_%n participants_" : ["%n учесник","%n учесници"],
     "Delete" : "Избриши",
     "Error" : "Грешка",
     "Server error" : "Грешка на серверот",
     "moderator" : "модератор",
     "Share" : "Сподели",
     "Loading" : "Се вчитува",
-    "Settings saved" : "Параматрите се зачувани",
-    "Start" : "Почеток"
+    "Settings saved" : "Параматрите се зачувани"
 },
 "nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;");

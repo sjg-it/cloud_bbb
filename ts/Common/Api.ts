@@ -44,6 +44,7 @@ export interface Room {
 	mediaCheck: boolean,
 	cleanLayout: boolean,
 	joinMuted: boolean,
+	running: boolean,
 	hideRoom: boolean,
 }
 
@@ -129,6 +130,18 @@ class Api {
 
 	public async deleteRestriction(id: number) {
 		const response = await axios.delete(this.getUrl(`restrictions/${id}`));
+
+		return response.data;
+	}
+
+	public async isRunning(uid: string): Promise<boolean> {
+		const response = await axios.get(this.getUrl(`server/${uid}/isRunning`));
+
+		return response.data;
+	}
+
+	public async insertDocument(uid: string, url: string, filename: string): Promise<boolean> {
+		const response = await axios.post(this.getUrl(`server/${uid}/insertDocument`), { url, filename });
 
 		return response.data;
 	}
@@ -259,9 +272,9 @@ class Api {
 			groups: [],
 			circles: [],
 			exact: {
-			       users: response.data.ocs.data.exact.users,
-			       groups: response.data.ocs.data.exact.groups,
-			       circles: response.data.ocs.data.exact.circles || [],
+				users: response.data.ocs.data.exact.users,
+				groups: response.data.ocs.data.exact.groups,
+				circles: response.data.ocs.data.exact.circles || [],
 			},
 		};
 	}
