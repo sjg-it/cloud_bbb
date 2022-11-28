@@ -5,6 +5,7 @@ OC.L10N.register(
     "Back to %s" : "Tilbake til %s",
     "Save" : "Lagre",
     "Community" : "Samfunn",
+    "Restrictions" : " Begrensninger",
     "Display name" : "Visningsnavn",
     "Password" : "Passord",
     "Join" : "Bli med",
@@ -27,6 +28,7 @@ OC.L10N.register(
     "moderator" : "moderator",
     "Share" : "Del",
     "Loading" : "Laster",
-    "Settings saved" : "Innstillinger lagret"
+    "Settings saved" : "Innstillinger lagret",
+    "Send to" : "Send til"
 },
 "nplurals=2; plural=(n != 1);");
